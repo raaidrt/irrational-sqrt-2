@@ -18,7 +18,8 @@ $2 {b'}^2 = {a'}^2$. We have two cases to consider.
   $2 {b'}^2 = 4 k_a^2$. This further means that ${b'}^2 = 2 k_a^2$, which means that $b'$
   is even as well, giving us a contradiction on $\gcd(a', b') = 1$ (the gcd is at least 2). 
 * Case 2 ($a'$ is odd): In this case, there exists some $k_a$ such that $2 k_a + 1 = a$, giving
-  $2 {b'}^2 = 4 k_a^2 + 4 k_a + 1$. Finally, this means that $2 {b'}^2 = 2 (k_a^2 + k_a) + 1$, 
+  $2 {b'}^2 = 4 k_a^2 + 4 k_a + 1$. Finally, this means that 
+  $2 {b'}^2 = 2 (2 k_a^2 + 2 k_a) + 1$, 
   but this means that the left hand side is even, but the right hand side is odd, giving us 
   a contradiction. 
   
