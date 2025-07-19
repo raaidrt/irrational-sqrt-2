@@ -27,7 +27,8 @@ theorem sqrt_2_is_irrational : Irrational √2 := by
       intro h_b_eq_zero
       refine hb_zero ?_
       simp [h_b_eq_zero]
-    obtain ⟨a', b', h_coprime, h_eq, hb'_non_zero⟩ := exists_reduced_rational_for_rational a b hb_zero
+    obtain ⟨a', b', h_coprime, h_eq, hb'_non_zero⟩ := by
+      apply exists_reduced_rational_for_rational a b hb_zero
     have h_eq_ℝ : (a : ℝ) / b = a' / b' := by
       norm_cast
       rify [h_eq]
@@ -62,4 +63,16 @@ theorem sqrt_2_is_irrational : Irrational √2 := by
       have : ¬IsCoprime a' b' := not_coprime_if_both_even a' b' h_even hb_even
       absurd this
       exact h_coprime
-    · sorry
+    · have ⟨kₐ, h_kₐ⟩ : ∃kₐ, a' = 2 * kₐ + 1  := by apply h_odd
+      have h_eq' : 2 * b' ^ 2 = 2 * (2 * kₐ ^ 2 + 2 * kₐ) + 1 := by calc
+        2 * b'^2 = a'^2 := by apply hab
+              _ = (2 * kₐ + 1)^2 := by rw [h_kₐ]
+              _ = 4 * kₐ ^ 2 + 4 * kₐ + 1 := by ring
+              _ = 2 * (2 * kₐ ^ 2 + 2 * kₐ) + 1 := by ring
+      have h1 : Even (2 * b'^2) := ⟨b'^2, by ring⟩
+      have h2 : Odd (2 * (2 * kₐ^2 + 2 * kₐ) + 1) := ⟨2 * kₐ^2 + 2 * kₐ, by ring⟩
+      rw [←h_eq'] at h2
+      have h2 : ¬Even (2 * b'^2) := by
+        apply Int.not_even_iff_odd.mpr h2
+      absurd h2
+      exact h1
